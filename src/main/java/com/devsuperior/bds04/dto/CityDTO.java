@@ -9,6 +9,8 @@ public class CityDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+
+	@NotBlank(message = "Campo requerido")
 	private String name;
 	
 	public CityDTO() {
