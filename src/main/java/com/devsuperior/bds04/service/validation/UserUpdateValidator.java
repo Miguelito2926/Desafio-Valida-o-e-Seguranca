@@ -18,11 +18,13 @@ import java.util.Map;
 
 public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserUpdateDTO> {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
+    private final HttpServletRequest request;
 
-    @Autowired
-    private HttpServletRequest request;
+    public UserUpdateValidator(UserRepository repository, HttpServletRequest request) {
+        this.repository = repository;
+        this.request = request;
+    }
 
     @Override
     public void initialize(UserUpdateValid ann) {

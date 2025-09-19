@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class CityService {
 
-
 	private final CityRepository cityRepository;
 
     public CityService(CityRepository cityRepository) {

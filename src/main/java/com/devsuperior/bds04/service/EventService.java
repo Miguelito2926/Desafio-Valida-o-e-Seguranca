@@ -5,7 +5,6 @@ import com.devsuperior.bds04.dto.EventDTO;
 import com.devsuperior.bds04.entities.City;
 import com.devsuperior.bds04.entities.Event;
 import com.devsuperior.bds04.repositories.EventRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
