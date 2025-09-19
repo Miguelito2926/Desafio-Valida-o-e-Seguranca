@@ -14,10 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EventService {
 
-	@Autowired
-	private EventRepository eventRepository;
+	private final EventRepository eventRepository;
 
-	@Transactional(readOnly = true)
+    public EventService(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
+    @Transactional(readOnly = true)
 	public Page<EventDTO> findAllPaged(Pageable pageable) {
 		Page<Event> list = eventRepository.findAll(pageable);
 		return list.map(EventDTO::new);
