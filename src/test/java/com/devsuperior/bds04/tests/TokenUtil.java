@@ -17,23 +17,23 @@ import org.springframework.util.MultiValueMap;
 public class TokenUtil {
 
 	@Value("${security.client-id}")
-	private String clientId;
+	private String myclientId;
 
 	@Value("${security.client-secret}")
-	private String clientSecret;
+	private String myclientSecret;
 	
 	public String obtainAccessToken(MockMvc mockMvc, String username, String password) throws Exception {
 
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "password");
-		params.add("client_id", clientId);
+		params.add("client_id", myclientId);
 		params.add("username", username);
 		params.add("password", password);
 
 		ResultActions result = mockMvc
 				.perform(post("/oauth2/token")
 						.params(params)
-						.with(httpBasic(clientId, clientSecret))
+						.with(httpBasic(myclientId, myclientSecret))
 						.accept("application/json;charset=UTF-8"))
 						.andExpect(status().isOk())
 						.andExpect(content().contentType("application/json;charset=UTF-8"));

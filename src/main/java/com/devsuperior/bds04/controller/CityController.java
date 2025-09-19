@@ -2,7 +2,9 @@ package com.devsuperior.bds04.controller;
 
 import com.devsuperior.bds04.dto.CityDTO;
 import com.devsuperior.bds04.service.CityService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +21,6 @@ import java.util.List;
 @RequestMapping(value = "/cities")
 public class CityController {
 
-
 	private final CityService cityService;
 
     public CityController(CityService cityService) {
@@ -31,8 +32,9 @@ public class CityController {
 		return ResponseEntity.ok().body(cityService.findAll());
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
-	public ResponseEntity<CityDTO> insert(@RequestBody CityDTO dto) {
+	public ResponseEntity<CityDTO> insert(@RequestBody @Valid CityDTO dto) {
 		dto = cityService.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
